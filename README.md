@@ -1,17 +1,17 @@
-- mkdir replica_database
-- cd replica_database
+- mkdir cm_replica_demo
+- cd cm_replica_demo
 - mkdir r1
 - mkdir r2
 - mkdir r3
 
-- mongod --replSet db_replica  --dbpath ./r1 --port 27018 
-- mongod --replSet db_replica  --dbpath ./r2 --port 27019 
-- mongod --replSet db_replica  --dbpath ./r3 --port 27020 
+- mongod --replSet cmpos --logpath ./r1.log --dbpath ./r1 --port 27018 
+- mongod --replSet cmpos --logpath ./r2.log --dbpath ./r2 --port 27019 
+- mongod --replSet cmpos --logpath ./r3.log --dbpath ./r3 --port 27020 
 
 
 - mongo --port 27018
 
-- config = {_id: "db_replica", members:[
+- config = {_id: "cmpos", members:[
 
     {_id: 0, host: "localhost:27018"},
  
@@ -23,10 +23,9 @@
 - rs.initiate(config);
 - rs.status();
 
-- mongo --host db_replica/localhost:27018,localhost:27019,localhost:27020
+- mongo --host cmpos/localhost:27018,localhost:27019,localhost:27020
 
------------------------------------------------------------------------------
-
-- create database "course" and collection "subject"
-- use course
-- db.getCollection('subjects').find({})
+------------------------------------------------------------------------
+- create database"test_data" and collection "test"
+- use test_data
+- db.getCollection('test').find({})
